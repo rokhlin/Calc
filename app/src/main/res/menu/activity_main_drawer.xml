@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Calculator">
+            <menu>
+                <item
+                    android:id="@+id/basic_calc"
+                    android:icon="@drawable/technologies"
+                    android:title="Basic" />
+                <item
+                android:id="@+id/eng_calc"
+                android:icon="@drawable/technologies"
+                android:title="Engineer" />
+                <item
+                    android:id="@+id/nav_proportion"
+                    android:icon="@drawable/division"
+                    android:title="Proportions" />
+            </menu>
+        </item>
+        <item
+            android:id="@+id/nav_currency"
+            android:icon="@drawable/arrows"
+            android:title="Currency converter" />
+
+    </group>
+    <item
+        android:id="@+id/nav_manage"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Tools" />
+</menu>

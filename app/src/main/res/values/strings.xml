@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Calc</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    <!--Currency descriptions-->
+    <string name="PHP">Philippine peso</string>
+    <string name="PLN">Polish zloty</string>
+    <string name="RON">Romanian leu</string>
+    <string name="RUB">Russian ruble</string>
+    <string name="SEK">Swedish krona</string>
+    <string name="SGD">Singapore dollar</string>
+    <string name="THB">Thai baht</string>
+    <string name="TRY">Turkish lira</string>
+    <string name="USD">United States dollar</string>
+    <string name="ZAR">South African rand</string>
+    <string name="EUR">Euro</string>
+    <string name="BGN">Bulgarian lev</string>
+    <string name="BRL">Brazilian real</string>
+    <string name="CAD">Canadian dollar</string>
+    <string name="CHF">Swiss franc</string>
+    <string name="CNY">Chinese yuan</string>
+    <string name="CZK">Czech koruna</string>
+    <string name="DKK">Danish krone</string>
+    <string name="GBP">British pound</string>
+    <string name="HKD">Hong Kong dollar</string>
+    <string name="HRK">Croatian Kuna</string>
+    <string name="HUF">Hungarian forint</string>
+    <string name="IDR">Indonesian rupiah</string>
+    <string name="ILS">New Israel Shekel</string>
+    <string name="INR">Indian rupee</string>
+    <string name="JPY">Japanese yen</string>
+    <string name="KRW">South Korean won</string>
+    <string name="MXN">Mexican peso</string>
+    <string name="MYR">Malaysian ringgit</string>
+    <string name="NOK">Norwegian krone</string>
+    <string name="NZD">New Zealand dollar</string>
+    <string name="AUD">Austrian dollar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preferences_screen_value">preferences_screen_value</string>
+    <string name="preferences_statistics_value">preferences_statistics_value</string>
+    <string name="preferences_calc_op1_value">preferences_calc_op1_value</string>
+    <string name="preferences_calc_op2_value">preferences_calc_op2_value</string>
+    <string name="preferences_calc_operation">preferences_calc_operation</string>
+    <string name="preferences_calc_waitingForNextOperator_value">preferences_calc_waitingForNextOperator_value</string>
+    <string name="change_from">Change from</string>
+    <string name="change_to">Change to</string>
+    <string name="show">Show</string>
+    <string name="save_calculations">Save calculations</string>
+    <string name="hide">Hide</string>
+</resources>
