@@ -121,7 +121,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!s.equals("")) updateResults(input_To, spinner_to.getSelectedItem().toString());
+                if(!s.equals("") && input_From.equals(focused)) updateResults(input_To, spinner_to.getSelectedItem().toString());
 
             }
 
@@ -137,7 +137,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!s.equals("")) updateResults(input_From, spinner_from.getSelectedItem().toString());
+                if(!s.equals("")&& input_To.equals(focused)) updateResults(input_From, spinner_from.getSelectedItem().toString());
 
             }
 
