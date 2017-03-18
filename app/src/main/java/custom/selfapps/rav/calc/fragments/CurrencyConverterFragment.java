@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -353,6 +354,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
      */
     private void screenAppend(int i) {
         String number =  getScreenValue();
+
         EditText focusedView = getFocusedView();
         if(number.equals("0") || number.equals("NaN")) focusedView.setText(i + "");
         else  focusedView.setText(number + i);

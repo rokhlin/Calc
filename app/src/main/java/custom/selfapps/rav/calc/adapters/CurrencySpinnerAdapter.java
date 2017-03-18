@@ -47,7 +47,10 @@ public class CurrencySpinnerAdapter extends ArrayAdapter<String>  {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        View row = inflater.inflate(R.layout.spinner_closed_state, parent, false);
+        TextView label = (TextView) row.findViewById(R.id.textView_currency_name);
+        label.setText(data[position]);
+        return row;
     }
 
 
