@@ -197,7 +197,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
      *
      */
     private void initSpinners(Bundle savedInstanceState) {
-        //Spinner From
+        //Spinner From on the left side of the screen
         spinnerAdapter_from = new CurrencySpinnerAdapter(getContext(), getLayoutInflater(savedInstanceState), R.layout.row, currenciesData,spinnerToValue);
         spinnerAdapter_from.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_from.setAdapter(spinnerAdapter_from);
@@ -206,11 +206,14 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String temp = selectedFromValue;
+                selectedFromValue = currenciesData[position];
 
-                if(spinnerToValue.equals(currenciesData[position]))  spinnerToValue = temp;
-                    selectedFromValue = currenciesData[position];
+                if(spinnerToValue.equals(selectedFromValue)){
+                    spinnerToValue = temp;
+                    spinner_to.setSelection(spinnerAdapter_to.getPosition(spinnerToValue));
+                }
 
-                spinner_to.setSelection(spinnerAdapter_to.getPosition(spinnerToValue));
+
                 spinner_from.setSelection(spinnerAdapter_from.getPosition(selectedFromValue));
                 updateResults(input_To, selectedFromValue);
 
@@ -222,7 +225,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
             }
         });
 
-        //Spinner To
+        //Spinner To on the right side of the screen
         spinnerAdapter_to = new CurrencySpinnerAdapter(getContext(), getLayoutInflater(savedInstanceState), R.layout.row, currenciesData, selectedFromValue);
         spinnerAdapter_to.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_to.setAdapter(spinnerAdapter_to);
@@ -230,13 +233,19 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         spinner_to.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 String temp = spinnerToValue;
 
-                if(selectedFromValue.equals(currenciesData[position]))  selectedFromValue = temp;
                 spinnerToValue = currenciesData[position];
 
+                if(selectedFromValue.equals(spinnerToValue)){
+                    selectedFromValue = temp;
+                    spinner_from.setSelection(spinnerAdapter_from.getPosition(selectedFromValue));
+                }
+
+
                 spinner_to.setSelection(spinnerAdapter_to.getPosition(spinnerToValue));
-                spinner_from.setSelection(spinnerAdapter_from.getPosition(selectedFromValue));
+
                 updateResults(input_To, spinnerToValue);
             }
 
@@ -255,8 +264,8 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
      */
     private void updateResults(EditText updatableEditText, String newCurrency) {
 
-        listViewAdapter.updateData(getConvertedData(newCurrency, Double.parseDouble(getScreenValue())));
-        listViewAdapter.notifyDataSetChanged();
+//        listViewAdapter.updateData(getConvertedData(newCurrency, Double.parseDouble(getScreenValue())));
+//        listViewAdapter.notifyDataSetChanged();
 
         Currency currency = ((MainActivity)getActivity()).getCurrency();//TODO change get currency strategy
         double res = currency.getRelation(Double.parseDouble(getScreenValue()), selectedFromValue, spinnerToValue);
