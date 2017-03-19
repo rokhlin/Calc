@@ -83,7 +83,8 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         v.findViewById(R.id.button_8).setOnClickListener(this);
         v.findViewById(R.id.button_9).setOnClickListener(this);
         v.findViewById(R.id.button_return).setOnClickListener(this);
-
+        v.findViewById(R.id.button_clear).setOnClickListener(this);
+        v.findViewById(R.id.button_point).setOnClickListener(this);
         return v;
     }
 
@@ -282,6 +283,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         String tag = v.toString();
+        Logs.send(getContext(), "tag " + tag);
         tag = tag.substring(tag.indexOf("app:id/") + 7, tag.length() - 1);
         Logs.send(getContext(), "Pressed " + tag);
 
@@ -317,7 +319,13 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
                 screenAppend(0);
                 break;
             case R.id.button_point:
-                screenAddPoint();
+                screenAddPoint(getScreenValue());
+                break;
+            case R.id.button_clear:
+                clearScreen();
+                break;
+            case R.id.button_return:
+                screenRemoveLast(getScreenValue());
                 break;
         }
     }
@@ -340,11 +348,11 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
      * Append input field value with point entered from custom keyboard for using of the double value
      * IMPORTANT!!!!! It doesn't work with standard keyboards
      */
-    private void screenAddPoint() {
-        String number =  getScreenValue();
+    private void screenAddPoint(String value) {
+        String number = value;
         if(number.equals("0")) number = "0.";
         else if(!number.contains(".")) number += ".";
-        getFocusedView().setText(number);
+        focused.setText(number);
     }
 
     /**
@@ -358,6 +366,23 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         EditText focusedView = getFocusedView();
         if(number.equals("0") || number.equals("NaN")) focusedView.setText(i + "");
         else  focusedView.setText(number + i);
+    }
+
+
+    private void clearScreen() {
+        focused.setText("0");
+    }
+
+    private void screenRemoveLast(String screenValue) {
+        String number =  screenValue;
+
+        if(number.equals("NaN")) clearScreen();
+        if(number.equals("0")) return;
+        if(number.length() == 1) number = "0";
+        else number = number.substring(0,number.length()-1);
+
+        if(number.endsWith(".")) screenRemoveLast(number);
+        focused.setText(number);
     }
 
     private EditText getFocusedView() {
