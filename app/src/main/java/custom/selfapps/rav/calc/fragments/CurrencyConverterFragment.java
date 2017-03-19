@@ -1,6 +1,8 @@
 package custom.selfapps.rav.calc.fragments;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -61,6 +64,9 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_currency_converter, container, false);
 
+        final LinearLayout ll = (LinearLayout) v.findViewById(R.id.ll_show);
+        final LinearLayout lKeys = (LinearLayout) v.findViewById(R.id.keys_layout);
+
         spinner_from = (Spinner) v.findViewById(R.id.spinner_currencies_from);
         spinner_to = (Spinner) v.findViewById(R.id.spinner_currencies_to);
 
@@ -85,6 +91,22 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         v.findViewById(R.id.button_return).setOnClickListener(this);
         v.findViewById(R.id.button_clear).setOnClickListener(this);
         v.findViewById(R.id.button_point).setOnClickListener(this);
+
+        //Keyboard visibility listeners
+        v.findViewById(R.id.button_hide).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animateOperation(lKeys,View.GONE);
+                animateOperation(ll,View.VISIBLE);
+            }
+        });
+        v.findViewById(R.id.button_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animateOperation(lKeys,View.VISIBLE);
+                animateOperation(ll,View.GONE);
+            }
+        });
         return v;
     }
 
@@ -393,6 +415,24 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         if(number.endsWith(".")) screenRemoveLast(number);
         focused.setText(number);
     }
+    /**
+     * Animation changing status of the View
+     * @param view which need to change visibility
+     * @param visibility to this value GONE or VISIBLE
+     */
+    private void animateOperation(final View view, final int visibility) {
+        float alfa = visibility == View.GONE ? 0f : 1f;
+        view.animate()
+                .alpha(alfa)
+                .setDuration(150)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        view.setVisibility(visibility);
+                    }
+                });
+    }
+
 
     private EditText getFocusedView() {
         return focused;
