@@ -31,6 +31,8 @@ import custom.selfapps.rav.calc.adapters.ResultsListAdapter;
 import custom.selfapps.rav.calc.currency.model.Currency;
 import custom.selfapps.rav.calc.utils.Logs;
 
+import static custom.selfapps.rav.calc.utils.Animator.*;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -96,15 +98,15 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         v.findViewById(R.id.button_hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animateOperation(lKeys,View.GONE);
-                animateOperation(ll,View.VISIBLE);
+                animateShowHide(lKeys,View.GONE);
+                animateShowHide(ll,View.VISIBLE);
             }
         });
         v.findViewById(R.id.button_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animateOperation(lKeys,View.VISIBLE);
-                animateOperation(ll,View.GONE);
+                animateShowHide(lKeys,View.VISIBLE);
+                animateShowHide(ll,View.GONE);
             }
         });
         return v;
@@ -415,23 +417,7 @@ public class CurrencyConverterFragment extends Fragment implements View.OnClickL
         if(number.endsWith(".")) screenRemoveLast(number);
         focused.setText(number);
     }
-    /**
-     * Animation changing status of the View
-     * @param view which need to change visibility
-     * @param visibility to this value GONE or VISIBLE
-     */
-    private void animateOperation(final View view, final int visibility) {
-        float alfa = visibility == View.GONE ? 0f : 1f;
-        view.animate()
-                .alpha(alfa)
-                .setDuration(150)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(visibility);
-                    }
-                });
-    }
+
 
 
     private EditText getFocusedView() {

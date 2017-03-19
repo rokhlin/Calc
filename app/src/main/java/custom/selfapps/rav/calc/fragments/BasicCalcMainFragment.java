@@ -25,6 +25,8 @@ import custom.selfapps.rav.calc.calculator.BasicCalc;
 import custom.selfapps.rav.calc.calculator.CalculatorOperations;
 import custom.selfapps.rav.calc.utils.Logs;
 
+import static custom.selfapps.rav.calc.utils.Animator.animateShowHide;
+
 public class BasicCalcMainFragment extends Fragment implements View.OnClickListener {
     public static final String TAG = "BasicCalcMainFragment";
     public static final boolean logging = true;
@@ -68,17 +70,17 @@ public class BasicCalcMainFragment extends Fragment implements View.OnClickListe
         v.findViewById(R.id.button_hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animateOperation(lKeys,View.GONE);
-                animateOperation(input,View.GONE);
-                animateOperation(ll,View.VISIBLE);
+                animateShowHide(lKeys,View.GONE);
+                animateShowHide(input,View.GONE);
+                animateShowHide(ll,View.VISIBLE);
             }
         });
         v.findViewById(R.id.button_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                animateOperation(lKeys,View.VISIBLE);
-                animateOperation(input,View.VISIBLE);
-                animateOperation(ll,View.GONE);
+                animateShowHide(lKeys,View.VISIBLE);
+                animateShowHide(input,View.VISIBLE);
+                animateShowHide(ll,View.GONE);
             }
         });
 
@@ -149,25 +151,6 @@ public class BasicCalcMainFragment extends Fragment implements View.OnClickListe
 
         return v;
     }
-
-    /**
-     * Animation changing status of the View
-     * @param view which need to change visibility
-     * @param visibility to this value GONE or VISIBLE
-     */
-    private void animateOperation(final View view, final int visibility) {
-        float alfa = visibility == View.GONE ? 0f : 1f;
-        view.animate()
-                .alpha(alfa)
-                .setDuration(150)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(visibility);
-                    }
-                });
-    }
-
 
     @Override
     public void onClick(View v) {
